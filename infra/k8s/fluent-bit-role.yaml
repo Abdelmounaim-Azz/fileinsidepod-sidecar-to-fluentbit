@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: fluent-bit-read
+  namespace: kube-system
+rules:
+  - apiGroups: [""]
+    resources: ["nodes","pods", "pods/log"]
+    verbs: ["get", "watch", "list"]

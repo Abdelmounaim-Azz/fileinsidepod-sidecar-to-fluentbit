@@ -1,0 +1,20 @@
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: kube-system
+apiVersion: v1
+data:
+  fluent-bit.conf: |-
+    [SERVICE]
+        Flush          1
+        Daemon         Off
+        Log_Level      info
+    [INPUT]
+        Name           tail
+        Tag            kube.*
+        Path           /var/log/containers/*.log
+        DB             /var/log/flb_kube.db
+        Mem_Buf_Limit  5MB
+    [OUTPUT]
+        Name   stdout
+        Match  *
